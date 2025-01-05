@@ -1,0 +1,32 @@
+﻿@model Category
+
+<div class="card mx-auto mt-5" style="max-width: 500px;">
+    <div class="card-header bg-light text-dark">
+        <h5 class="mb-0">Edit Category</h5>
+    </div>
+    <div class="card-body">
+        <form method="post" asp-action="EditInAction">
+            <input type="hidden" asp-for="ID">
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label"></label>
+                <input type="text" asp-for="Name" class="form-control" >
+                <span asp-validation-for="Name" class="text text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Description" class="form-label"></label>
+                <input type="text" asp-for="Description" class="form-control" >
+                <span asp-validation-for="Description" class="text text-danger"></span>
+            </div>
+            <div class="text-end">
+                <button type="submit" class="btn btn-success" asp-action="EditInAction" asp-controller="Category" asp-route-id="ID">Update</button>
+                <a  class="btn btn-secondary" asp-action="Index" asp-controller="Category" >Back To List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+}

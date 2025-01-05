@@ -1,0 +1,58 @@
+﻿@model ProductCategoryListViewModel
+
+<div class="card mx-auto mt-5" style="max-width: 500px;">
+    <div class="card-header bg-light text-dark">
+        <h5 class="mb-0">Create New Product</h5>
+    </div>
+    <div class="card-body">
+        <form method="post" asp-action="Create" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label asp-for="product.Name" class="form-label"></label>
+                <input type="text" asp-for="product.Name" class="form-control" placeholder="Enter product name">
+                <span asp-validation-for="product.Name" class="text text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="product.Description" class="form-label"></label>
+                <input type="text" asp-for="product.Description" class="form-control" placeholder="Enter product description">
+                <span asp-validation-for="product.Description" class="text  text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="product.Price" class="form-label"></label>
+                <input type="text" asp-for="product.Price" class="form-control" placeholder="Enter price">
+                <span asp-validation-for="product.Price" class="text  text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="product.Quantity" class="form-label"></label>
+                <input type="text" asp-for="product.Quantity" class="form-control" placeholder="Enter Available Quantity">
+                <span asp-validation-for="product.Quantity" class="text  text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="product.ImgUrl" class="form-label"></label>
+                <input type="file" name="img" id="img" class="form-control">
+                <span asp-validation-for="product.ImgUrl" class="text  text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="product.Category_Id" class="form-label"></label>
+                <select asp-for="product.Category_Id" class="form-select">
+                    <option disabled selected>-- Select Option --</option>
+                    @foreach(var category in Model.categories)
+                    {
+                        <option value="@category.ID">@category.Name</option>
+                    }
+                </select>
+            </div>
+
+            <div class="text-end">
+                <button type="submit" class="btn btn-success" asp-action="Create" asp-controller="Product">Create</button>
+                <button type="reset" class="btn btn-secondary">Reset</button>
+                <!--<a class="btn btn-secondary" asp-action="Index" asp-controller="Product" class="btn btn-secondary">Back To List</a>-->
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+}

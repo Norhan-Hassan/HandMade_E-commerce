@@ -9,6 +9,7 @@ namespace HandMade.Entities.Repo_Interfaces
     public interface IUnitOfWork:IDisposable
     {
         public ICategoryRepo CategoryRepo { get; }
+        public IProductRepo ProductRepo{ get; }
         public int Save();
     }
 }
