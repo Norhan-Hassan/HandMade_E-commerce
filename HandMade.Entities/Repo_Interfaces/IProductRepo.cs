@@ -1,5 +1,6 @@
 ﻿using HandMade.Entities.Models;
 using HandMade.Entities.ViewModels;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,9 @@ namespace HandMade.Entities.Repo_Interfaces
 {
     public interface IProductRepo:IGenericRepo<Product>
     {
-        ProductCategoryListViewModel PrepareViewModel();
+        ProductCategoryListViewModel PrepareProdCatViewModel(Product ? product=null);
+        ShoppingCartViewModel PrepareShoppingCart(int id);
         void Update(Product product);
+
     }
 }

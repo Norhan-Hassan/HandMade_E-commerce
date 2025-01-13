@@ -1,0 +1,33 @@
+﻿@model Product
+
+<div class="card mx-auto mt-5" style="max-width: 500px;">
+    <div class="card-header bg-light text-dark">
+        <h5 class="mb-0">Delete Product</h5>
+    </div>
+    <div class="card-body">
+        <form method="post" asp-action="DeleteInAction">
+            <input type="hidden" asp-for="ID">
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label"></label>
+                <input type="text" asp-for="Name" class="form-control" disabled>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Description" class="form-label"></label>
+                <input type="text" asp-for="Description" class="form-control" disabled>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Quantity" class="form-label"></label>
+                <input type="text" asp-for="Quantity" class="form-control" disabled>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Price" class="form-label"></label>
+                <input type="text" asp-for="Price" class="form-control" disabled>
+            </div>
+            <div class="text-end">
+                <button type="submit" class="btn btn-success" asp-area="Admin" asp-action="DeleteInAction" asp-controller="Product" asp-route-id="ID">Delete</button>
+                <a class="btn btn-secondary" asp-action="Index" asp-controller="Product">Back To List</a>
+            </div>
+        </form>
+    </div>
+</div>
+@* <a onClick=DeleteItem("/Admin/Product/Delete/${data}") class="btn btn-danger">Delete</a> *@

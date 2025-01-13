@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Product>
+<link rel="stylesheet" href="~/css/site.css" />
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+
+            @foreach(var item in Model)
+            {
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <a href="\User\Home\Details\@item.ID">
+                            <img class="card-img-top"
+                                 src="~/@item.ImgUrl"
+                                 alt="prodcut image"
+                                 style="width: 265px; height: 300px; object-fit: cover; object-position: center;" />
+                        </a>
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <h5 class="fw-bolder">@item.Name</h5>
+                                $ @item.Price
+                            </div>
+                        </div>
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent d-flex justify-content-center align-items-center">
+                            <span class="mx-2">
+                                <a class="btn btn-outline-dark mt-auto custom-btn" href="">
+                                    Add to cart
+                                </a>
+                            </span>
+                            <span class="mx-2">
+                                <a class="btn btn-outline-dark custom-heart-btn" href="">
+                                    <i class="bi-heart"></i>
+                                </a>
+                            </span>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+ </section>

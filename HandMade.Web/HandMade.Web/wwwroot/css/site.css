@@ -17,6 +17,29 @@ html {
   min-height: 100%;
 }
 
-body {
-  margin-bottom: 60px;
+.custom-btn {
+    color: #1d6999;
+    border-color: #1d6999;
+    text-decoration: none;
+    transition: all 0.3s ease;
 }
+
+.custom-btn:hover {
+    background-color: #1d6999;
+    color: #ffffff;
+}
+.custom-heart-btn {
+    color: #1d6999; 
+    border-color: #1d6999;
+    text-decoration: none;
+    transition: all 0.1s ease;
+}
+
+    .custom-heart-btn:hover {
+        background-color: #ff4d4d; 
+        color: #ffffff;
+        border-color: #ff4d4d; 
+    }
+/*body {
+    margin-bottom: 60px;
+}*/

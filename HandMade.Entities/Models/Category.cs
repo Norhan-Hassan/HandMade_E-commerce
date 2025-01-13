@@ -13,15 +13,15 @@ namespace HandMade.Entities.Models
         [Key]
         public int ID { get; set; }
 
-        [Required(ErrorMessage ="Name is Required")]
+        [Required(ErrorMessage = "Name is Required")]
         [Display(Name = "Category Name")]
-        public string Name  { get; set; }
+        public string Name { get; set; }
 
-        [MaxLength(150, ErrorMessage ="Maximum Length is 150 character")]
+        [MaxLength(150, ErrorMessage = "Maximum Length is 150 character")]
         [Required(ErrorMessage = "Description is Required")]
-        public string Description  { get; set; }
+        public string Description { get; set; }
         public DateTime CreatedTime { get; set; } = DateTime.Now;
-        [ValidateNever]
-        public ICollection<Product>  products{ get; set; }
+
+        //public ICollection<Product>  products{ get; set; }
     }
 }
