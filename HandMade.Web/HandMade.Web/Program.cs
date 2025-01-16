@@ -1,6 +1,8 @@
 using HandMade.DataAccess.Data;
 using HandMade.DataAccess.Repo_Implementations;
+using HandMade.Entities.Models;
 using HandMade.Entities.Repo_Interfaces;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace HandMade.Web
@@ -19,7 +21,12 @@ namespace HandMade.Web
                 builder.Configuration.GetConnectionString("DefaultConnection")
                 )
             );
+
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>();
+
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
 
             var app = builder.Build();
 
@@ -38,6 +45,10 @@ namespace HandMade.Web
 
             app.UseAuthorization();
 
+            app.MapControllerRoute(
+                name: "default",
+                pattern: "{area=Identity}/{controller=Account}/{action=Register}/{id?}"
+                );
 
             app.MapControllerRoute(
                 name: "default",

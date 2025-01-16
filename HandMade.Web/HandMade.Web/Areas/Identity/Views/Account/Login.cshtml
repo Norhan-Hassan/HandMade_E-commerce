@@ -1,0 +1,40 @@
+﻿@model LoginUserViewModel
+
+<div class="d-flex justify-content-center align-items-center vh-100" >
+    <div class="card shadow-lg" style="width: 28rem; background-color: #f8f9fa; border-radius: 10px;">
+        <div class="card-header text-center" style="background-color: #95b7ed; color: #ffffff; border-radius: 10px 10px 0 0;">
+            <h4>Welcome Back!</h4>
+            <p style="font-size: 0.9rem; color: #d1d5db;">Please login to your account to continue.</p>
+        </div>
+        <div class="card-body">
+            <form asp-action="Login">
+                <div asp-validation-summary="All" class="text-danger mb-3"></div>
+                <div class="form-group mb-3">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" placeholder="Enter your username" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Password" class="control-label"></label>
+                    <input asp-for="Password" type="password" class="form-control" placeholder="Enter your password" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check mb-3">
+                    <input class="form-check-input" asp-for="RememberMe" />
+                    <label class="form-check-label" asp-for="RememberMe">Remember Me</label>
+                </div>
+                <div class="d-grid">
+                    <input type="submit" value="Log In" class="btn btn-primary" style="background-color: #09264f; border: none;" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@* <div>
+    <a asp-action="Index">Back to List</a>
+</div> *@
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

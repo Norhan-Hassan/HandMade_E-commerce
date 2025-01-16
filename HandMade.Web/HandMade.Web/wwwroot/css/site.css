@@ -40,6 +40,82 @@ html {
         color: #ffffff;
         border-color: #ff4d4d; 
     }
+
+.header-background {
+    background-image: url('/assets/images/Handmade2.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 450px;
+}
+
+body {
+    background-color: #f8f9fa;
+}
+
+.navbar {
+    background-color: #bcd3f7;
+}
+
+.navbar-brand {
+    color: #f0f0f5;
+    font-weight: bold;
+}
+
+    .navbar-brand:hover {
+        color: #09264f;
+        font-weight: bold;
+    }
+
+.navbar-nav .nav-link {
+    color: #ffffff;
+}
+
+    .navbar-nav .nav-link:hover {
+        color: #3c41c9; /* Same hover color as Products and Categories */
+        font-size: larger;
+        transition: color 0.3s ease, font-size 0.3s ease; /* Smooth transition */
+    }
+
+header {
+    background: linear-gradient(to right, #d0ebff, #c3f9d1);
+    color: #333;
+}
+
+    header h1 {
+        color: #1e478a;
+        text-shadow: 3px 0px #5f5280;
+    }
+
+    header p {
+        color: #5f5280;
+    }
+
+.btn-primary {
+    background-color: #ff6f61;
+    border-color: #ff6f61;
+}
+
+    .btn-primary:hover {
+        background-color: #ff8c69;
+        border-color: #ff8c69;
+    }
+
+footer {
+    background-color: #95b7ed;
+    color: #09264f;
+}
+
+    footer p {
+        margin: 0;
+    }
+
+a {
+    color: #ffffff;
+}
+
+    a:hover {
+        color: #ffdab9;
+    }
 /*body {
     margin-bottom: 60px;
 }*/
