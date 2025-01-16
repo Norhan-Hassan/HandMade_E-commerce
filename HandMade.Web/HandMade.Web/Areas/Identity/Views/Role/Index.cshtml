@@ -1,0 +1,17 @@
+﻿@model List<string>
+
+<table class="table table-striped table-hover table-bordered text-center mt-4">
+    <thead class="table-primary">
+        <tr>
+            <th scope="col">Role</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item</td>
+            </tr>
+        }
+    </tbody>
+</table>

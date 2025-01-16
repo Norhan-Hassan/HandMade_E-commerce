@@ -1,6 +1,9 @@
 ﻿@model RegisterUserViewModel
 
+<link rel="stylesheet" href="~/css/site.css" />
+
 <div class="d-flex justify-content-center align-items-center vh-100">
+  
     <div class="card shadow-lg" style="width: 28rem; background-color: #f8f9fa; border-radius: 10px;">
         <div class="card-header text-center" style="background-color: #95b7ed; color: #ffffff; border-radius: 10px 10px 0 0;">
             <h4>Create Account</h4>
@@ -40,11 +43,15 @@
         </div>
     </div>
 </div>
+<div class="text-center mb-4">
+    <p class="mb-2" style="font-size: 1rem; color: #6c757d;">
+        already have an account?
+    </p>
+    <a asp-action="Login" class="custom-btn btn" style="border-radius: 20px; font-weight: bold;">
+        Login
+    </a>
+</div>
 
-
-@* <div>
-    <a asp-action="Index">Back to List</a>
-</div> *@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
