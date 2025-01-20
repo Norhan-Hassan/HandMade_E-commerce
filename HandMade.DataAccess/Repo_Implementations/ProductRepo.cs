@@ -4,13 +4,13 @@ using HandMade.Entities.Models;
 using HandMade.Entities.Repo_Interfaces;
 using HandMade.Entities.ViewModels;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-
 
 
 namespace HandMade.DataAccess.Repo_Implementations
@@ -47,17 +47,7 @@ namespace HandMade.DataAccess.Repo_Implementations
             }
             return null;
         }
-        public ShoppingCartViewModel PrepareShoppingCart(int id)
-        {
-            var product=base.GetOne(p=>p.ID==id,include: "Category");
-            ShoppingCartViewModel shoppingCart = new ShoppingCartViewModel()
-            {
-                product = product,
-                count = 1
-            };
-            return shoppingCart;
-
-        }
+        
         public void Update(Product product)
         {
             var productInDb = base.GetOne(c => c.ID == product.ID);

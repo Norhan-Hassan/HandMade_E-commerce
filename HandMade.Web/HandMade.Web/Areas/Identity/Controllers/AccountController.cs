@@ -1,5 +1,6 @@
 ﻿using HandMade.Entities.Models;
 using HandMade.Entities.ViewModels;
+using HandMade.Web.Utilities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -26,18 +27,27 @@ namespace HandMade.Web.Areas.Identity.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterUserViewModel userViewModel)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                ApplicationUser user= new ApplicationUser();
+                ApplicationUser user = new ApplicationUser();
 
                 user.UserName = userViewModel.Name;
                 user.Email = userViewModel.Email;
                 user.Address = userViewModel.Address;
 
-                IdentityResult result=await userManager.CreateAsync(user, userViewModel.Password);
-                if(result.Succeeded)
+                IdentityResult result = await userManager.CreateAsync(user, userViewModel.Password);
+                if (result.Succeeded)
                 {
-                    return RedirectToAction("Login","Account");
+                    string role = HttpContext.Request.Form["Role"].ToString();//radio_button
+                    if (String.IsNullOrEmpty(role))//ordinary customer
+                    {
+                        await userManager.AddToRoleAsync(user, Role.CustomerRole); //in utilities folder
+                        return RedirectToAction("Login", "Account");
+                    }
+
+                    await userManager.AddToRoleAsync(user, role);
+                    return RedirectToAction("Index","Users", new { area = "Admin" });
+                    
                 }
                 foreach (var item in result.Errors)
                 {
@@ -85,6 +95,8 @@ namespace HandMade.Web.Areas.Identity.Controllers
             await signInManager.SignOutAsync();
             return RedirectToAction("Login", "Account");
         }
+
+       
 
     }
 }

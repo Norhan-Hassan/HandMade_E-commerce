@@ -2,12 +2,14 @@
 using HandMade.Entities.Models;
 using HandMade.Entities.Repo_Interfaces;
 using HandMade.Entities.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HandMade.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class ProductController : Controller
     {
         private readonly IUnitOfWork unitOfWork;

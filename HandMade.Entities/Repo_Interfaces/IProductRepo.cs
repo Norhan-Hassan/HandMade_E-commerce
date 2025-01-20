@@ -12,7 +12,6 @@ namespace HandMade.Entities.Repo_Interfaces
     public interface IProductRepo:IGenericRepo<Product>
     {
         ProductCategoryListViewModel PrepareProdCatViewModel(Product ? product=null);
-        ShoppingCartViewModel PrepareShoppingCart(int id);
         void Update(Product product);
 
     }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HandMade.Entities.ViewModels
 {
-    public class RegisterUserViewModel
+    public class AssignUserToRoleViewModel
     {
         [Required(ErrorMessage = "Name is required")]
         public string Name { get; set; }
@@ -21,15 +21,15 @@ namespace HandMade.Entities.ViewModels
         [Required(ErrorMessage = "Provide confirm password")]
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "Passwords do not match")]
-        [DisplayName("Confirm Password")]
         public string ConfirmPassword { get; set; }
 
         [Required(ErrorMessage = "Email is required")]
         [EmailAddress]
-        public string Email {  get; set; }
+        public string Email { get; set; }
 
+        [Required(ErrorMessage = "User Type is required")]
+        [DisplayName("User Type")]
+        public bool UserType { get; set; }
 
-        [Required(ErrorMessage = "Address is required")]
-        public string Address { get; set; }
     }
 }

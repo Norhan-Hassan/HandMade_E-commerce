@@ -9,7 +9,6 @@ namespace HandMade.Entities.ViewModels
 {
     public class ShoppingCartViewModel
     {
-        public Product product { get; set; }
-        public int count { get; set; }
+        public IEnumerable<ShoppingCart> shoppingCarts { get; set; }
     }
 }

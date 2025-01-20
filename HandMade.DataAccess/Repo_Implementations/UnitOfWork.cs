@@ -13,11 +13,13 @@ namespace HandMade.DataAccess.Repo_Implementations
         private readonly ApplicationDbContext context;
         public ICategoryRepo CategoryRepo { get; private set; }
         public IProductRepo ProductRepo { get; private set; }
+        public IShoppingCartRepo ShoppingCartRepo { get; private set; }
         public UnitOfWork(ApplicationDbContext context)
         {
             this.context = context;
             this.CategoryRepo = new CategoryRepo(context);
             this.ProductRepo = new ProductRepo(context);
+            this.ShoppingCartRepo= new ShoppingCartRepo(context);
         }
 
         public void Dispose()

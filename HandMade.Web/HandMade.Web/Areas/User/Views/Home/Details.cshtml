@@ -1,30 +1,32 @@
-﻿@model ShoppingCartViewModel
-<link rel="stylesheet" href="~/css/site.css"/>
+﻿@model ShoppingCart
+
+<form method="post" asp-action="DetailsInAction">
 <section class="py-5">
     <div class="container px-4 px-lg-5 my-5">
         <div class="row gx-4 gx-lg-5 align-items-center">
             <div class="col-md-6">
-                <img class="card-img-top mb-5 mb-md-0"
-                     src="~/@Model.product.ImgUrl" alt="..."
-                     style="width: 600px; height: 650px; object-fit: cover; object-position: center;" />
-            </div>
+                <img class="card-img-top mb-5 mb-md-0" src="~/@Model.product.ImgUrl" alt="Product Image Not Found" style="width: 600px; height: 650px; object-fit: cover; object-position: center;" />
+                </div>
             <div class="col-md-6">
+                 <input type="hidden" asp-for="productId" />
                 <div class="small mb-1">@Model.product.Category.Name</div>
                 <h1 class="display-5 fw-bolder">@Model.product.Name</h1>
                 <div class="fs-5 mb-5">
-                    <span>$@Model.product.Price</span>
+                    <span >$ @Model.product.Price</span>
                 </div>
-                <p class="lead">@Model.product.Description</p>
+                <p class="lead">
+                    
+                    @Model.product.Description
+                    </p>
                 <div class="d-flex">
-                    <input class="form-control text-center me-3" id="inputQuantity" asp-for="count" style="max-width: 3rem" />
-                    <button class="btn btn-outline-dark flex-shrink-0 custom-btn" type="button">
-                    <i class="bi-cart-fill me-1"></i>
-                    Add to cart
-                    </button>
+                    <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" name="count" style="max-width: 3rem" />
+                        <button class="btn btn-outline-dark flex-shrink-0 custom-btn" type="submit">
+                            <i class="bi-cart-fill me-1"></i>
+                            Add to cart
+                        </button>
                 </div>
-                
-
             </div>
         </div>
     </div>
 </section>
+</form>

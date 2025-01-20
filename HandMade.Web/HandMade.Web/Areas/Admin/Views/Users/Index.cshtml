@@ -1,0 +1,48 @@
+﻿@model IEnumerable<ApplicationUser>
+
+<br />
+<div class="d-flex justify-content-start mb-3">
+    <a class="btn btn-secondary" asp-action="Register" asp-controller="Account" asp-area="Identity">Create New User</a>
+</div>
+<br />
+<div class="card mx-auto" style="background-color: #f8f9fa; border-color: #ccc;">
+    <table class="table table-striped table-hover table-bordered mb-0">
+        <thead class="bg-secondary text-white">
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th class="text-center">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.UserName</td>
+                    <td>@user.Email</td>
+                    <td>@user.Address</td>
+                    <td class="text-center">
+                       @*  @if(user.LockoutEnd == null | user.LockoutEnd<DateTime.Now)
+                        {
+                            <a class="btn btn-sm btn-outline-secondary me-2" asp-action="LockUnLock" asp-controller="Users" asp-route-id="@user.Id">
+                                <i class="fas fa-lock-open">
+                                </i>
+                            </a>
+                        }
+                        else
+                        {
+                            <a class="btn btn-sm btn-outline-secondary me-2" asp-action="LockUnLock" asp-controller="Users" asp-route-id="@user.Id">
+                                <i class="fas fa-lock">
+                                </i>
+                            </a>
+                        } *@
+                        <a class="btn btn-sm btn-danger" asp-action="Delete" asp-controller="Users" asp-route-id="@user.Id">
+                           Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

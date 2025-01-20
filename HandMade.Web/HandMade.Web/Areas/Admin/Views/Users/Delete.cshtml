@@ -1,0 +1,28 @@
+﻿@model ApplicationUser
+<div class="card mx-auto mt-5" style="max-width: 500px;">
+    <div class="card-header bg-light text-dark">
+        <h5 class="mb-0">Delete Product</h5>
+    </div>
+    <div class="card-body">
+        <form method="post" asp-action="DeleteInAction">
+            <input type="hidden" asp-for="Id">
+            <div class="mb-3">
+                <label asp-for="UserName" class="form-label"></label>
+                <input type="text" asp-for="UserName" class="form-control" disabled>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Email" class="form-label"></label>
+                <input type="text" asp-for="Email" class="form-control" disabled>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Address" class="form-label"></label>
+                <input type="text" asp-for="Address" class="form-control" disabled>
+            </div>
+       
+            <div class="text-end">
+                <button type="submit" class="btn btn-success" asp-area="Admin" asp-action="DeleteInAction" asp-controller="Users" asp-route-id="Id">Delete</button>
+                <a class="btn btn-secondary" asp-action="Index" asp-controller="Users">Back To List</a>
+            </div>
+        </form>
+    </div>
+</div>

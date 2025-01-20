@@ -10,6 +10,7 @@ namespace HandMade.Entities.Repo_Interfaces
     {
         public ICategoryRepo CategoryRepo { get; }
         public IProductRepo ProductRepo{ get; }
+        public IShoppingCartRepo ShoppingCartRepo { get; }
         public int Save();
     }
 }

@@ -21,7 +21,7 @@ namespace HandMade.Entities.Models
         [Required(ErrorMessage = "Description is Required")]
         public string Description { get; set; }
         public DateTime CreatedTime { get; set; } = DateTime.Now;
-
-        //public ICollection<Product>  products{ get; set; }
+        [ValidateNever]
+        public ICollection<Product>  products{ get; set; }
     }
 }

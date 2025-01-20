@@ -5,9 +5,9 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HandMade.Web", "HandMade.Web\HandMade.Web.csproj", "{DD207544-DEB6-4BD4-9CC5-27EFD98BA0BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HandMade.Entities", "..\HandMade.Entities\HandMade.Entities.csproj", "{2ED6AB75-A192-4CA9-9DE7-832B1811144B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HandMade.Entities", "..\HandMade.Entities\HandMade.Entities.csproj", "{2ED6AB75-A192-4CA9-9DE7-832B1811144B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HandMade.DataAccess", "..\HandMade.DataAccess\HandMade.DataAccess.csproj", "{95D08BA8-B8E7-45F3-A669-A26115B026B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HandMade.DataAccess", "..\HandMade.DataAccess\HandMade.DataAccess.csproj", "{95D08BA8-B8E7-45F3-A669-A26115B026B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -16,6 +16,26 @@ html {
   position: relative;
   min-height: 100%;
 }
+.custom-cart-btn {
+    color: #0a3d62; /* Darker shade of blue */
+    border-color: #0a3d62; /* Darker shade of blue */
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+    .custom-cart-btn:hover {
+        background-color: #0a3d62; /* Darker shade of blue */
+        color: #ffffff;
+    }
+
+    .custom-cart-btn .badge {
+        background-color: #ffffff;
+        color: #0a3d62; /* Darker shade of blue */
+    }
+
+/*
+
+*/
 
 .custom-btn {
     color: #1d6999;
@@ -66,14 +86,17 @@ body {
         font-weight: bold;
     }
 
-.navbar-nav .nav-link {
+.navbar-nav {
     color: #ffffff;
+}
+.nav-link {
+    color:#0a3d62
 }
 
     .navbar-nav .nav-link:hover {
-        color: #3c41c9; /* Same hover color as Products and Categories */
+        color: #3c41c9; 
         font-size: larger;
-        transition: color 0.3s ease, font-size 0.3s ease; /* Smooth transition */
+        transition: color 0.3s ease, font-size 0.3s ease; 
     }
 
 header {
@@ -109,13 +132,15 @@ footer {
         margin: 0;
     }
 
+.non-decoration {
+    text-decoration: none;
+}
+
 a {
     color: #ffffff;
 }
 
+
     a:hover {
         color: #ffdab9;
     }
-/*body {
-    margin-bottom: 60px;
-}*/

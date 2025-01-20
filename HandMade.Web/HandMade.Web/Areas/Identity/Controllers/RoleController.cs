@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace HandMade.Web.Areas.Identity.Controllers
 {
     [Area("Identity")]
-    [Authorize(Roles ="Admin")]
+    [Authorize(Roles = "Admin")]
     public class RoleController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
@@ -55,6 +55,12 @@ namespace HandMade.Web.Areas.Identity.Controllers
                 }
             }
             return View("AddRole",roleVM);
+        }
+        [HttpGet]
+        public IActionResult AssignUserToRole()
+        {
+            return View("AssignUserToRole");
+
         }
     }
 }

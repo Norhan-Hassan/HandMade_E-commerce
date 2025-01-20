@@ -22,7 +22,11 @@ namespace HandMade.Web
                 )
             );
 
-            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>(
+
+               // options=>options.Lockout.DefaultLockoutTimeSpan=TimeSpan.FromHours(2)
+
+                ).AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -52,7 +56,7 @@ namespace HandMade.Web
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{area=User}/{controller=Home}/{action=Index}/{id?}"
+                pattern: "{area=User}/{controller=Home}/{action=Details}/{id?}"
                 );
 
                app.MapControllerRoute(
