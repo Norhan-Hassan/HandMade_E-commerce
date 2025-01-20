@@ -9,8 +9,8 @@ namespace HandMade.Entities.Repo_Interfaces
 {
     public interface IShoppingCartRepo:IGenericRepo<ShoppingCart>
     {
-        int IncreaseShoppingCartCount(ShoppingCart shoppingCart,int count);
-        int DecreaseShoppingCartCount(ShoppingCart shoppingCart,int count);
+        void IncreaseShoppingCartCount(ShoppingCart shoppingCart,int count);
+        void DecreaseShoppingCartCount(ShoppingCart shoppingCart,int count);
 
     }
 }

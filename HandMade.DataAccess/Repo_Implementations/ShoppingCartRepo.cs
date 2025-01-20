@@ -2,6 +2,7 @@
 using HandMade.DataAccess.Migrations;
 using HandMade.Entities.Models;
 using HandMade.Entities.Repo_Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,16 +19,21 @@ namespace HandMade.DataAccess.Repo_Implementations
             this.context = context;
         }
 
-        public int DecreaseShoppingCartCount(ShoppingCart shoppingCart, int count)
+        public void DecreaseShoppingCartCount(ShoppingCart shoppingCart, int count)
         {
-            shoppingCart.count -= count;
-            return shoppingCart.count;
+            if (shoppingCart.count > 1) 
+            {
+                shoppingCart.count -= count;
+            }
+            else
+            {
+                context.ShoppingCarts.Remove(shoppingCart);
+            }
         }
 
-        public int IncreaseShoppingCartCount(ShoppingCart shoppingCart, int count)
+        public void IncreaseShoppingCartCount(ShoppingCart shoppingCart, int count)
         {
             shoppingCart.count += count;
-            return shoppingCart.count;
         }
     }
 }

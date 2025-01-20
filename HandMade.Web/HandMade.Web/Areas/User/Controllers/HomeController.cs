@@ -55,6 +55,7 @@ namespace HandMade.Web.Areas.User.Controllers
                 return RedirectToAction("Login", "Account", new { area = "Identity" });
             }
             cart.userId = claims.FindFirst(ClaimTypes.NameIdentifier).Value;
+
             ShoppingCart ExistingCart = unitOfWork.ShoppingCartRepo.GetOne(
                 s => s.userId == cart.userId & s.productId == cart.productId
                 );
