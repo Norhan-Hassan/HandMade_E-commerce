@@ -18,24 +18,23 @@ namespace HandMade.Web.Areas.User.Controllers
         }
         public IActionResult Index()
         {
-            var claims = User.Identity as ClaimsIdentity;
-            if (!User.Identity.IsAuthenticated || claims == null)
+            if(unitOfWork.ApplicationUserRepo.GetCurrentUser() != null)
+            {
+                var userId = unitOfWork.ApplicationUserRepo.GetCurrentUser();
+                ShoppingCartViewModel shoppingCart = new ShoppingCartViewModel();
+                shoppingCart.shoppingCarts = unitOfWork.ShoppingCartRepo.GetAll(s => s.userId == userId, include: "product");
+
+                shoppingCart.TotalPrice =unitOfWork.OrderSummaryRepo.GetTotalOrderPrice(shoppingCart.shoppingCarts);
+
+
+                return View("Index", shoppingCart);
+            }
+            else
             {
                 return RedirectToAction("Login", "Account", new { area = "Identity" });
             }
 
-            string userId = claims.FindFirst(ClaimTypes.NameIdentifier).Value;
-
-            ShoppingCartViewModel shoppingCart = new ShoppingCartViewModel();
-            shoppingCart.shoppingCarts = unitOfWork.ShoppingCartRepo.GetAll(s => s.userId == userId, include: "product");
-
-            foreach(var cart in shoppingCart.shoppingCarts)
-            {
-                shoppingCart.TotalPrice += (cart.count * cart.product.Price);
-            }
-
-
-			return View("Index", shoppingCart);
+           
         }
 
         public IActionResult IncreaseCart(int cartId)
@@ -62,5 +61,40 @@ namespace HandMade.Web.Areas.User.Controllers
             return RedirectToAction("Index");
 
         }
+
+        [HttpGet]
+        public IActionResult Summary()
+        {
+            if (unitOfWork.ApplicationUserRepo.GetCurrentUser() != null)
+            {
+                var id = unitOfWork.ApplicationUserRepo.GetCurrentUser();
+                var shoppingCartViewModel = new ShoppingCartViewModel()
+                {
+                    shoppingCarts = unitOfWork.ShoppingCartRepo.GetAll(u => u.userId == id, include: "product"),
+                    orderSummary = new(),
+
+                };
+                shoppingCartViewModel.orderSummary.applicationUser = unitOfWork.ApplicationUserRepo.GetOne(u => u.Id == id);
+                shoppingCartViewModel.orderSummary.Address = shoppingCartViewModel.orderSummary.applicationUser.Address;
+                shoppingCartViewModel.orderSummary.Name = shoppingCartViewModel.orderSummary.applicationUser.UserName;
+                shoppingCartViewModel.orderSummary.Email = shoppingCartViewModel.orderSummary.applicationUser.Email;
+
+
+                shoppingCartViewModel.TotalPrice = unitOfWork.OrderSummaryRepo.GetTotalOrderPrice(shoppingCartViewModel.shoppingCarts); 
+
+                return View("Summary", shoppingCartViewModel);
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account", new { area = "Identity" });
+            }
+        }
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public IActionResult CheckOut()
+        //{
+
+        //}
     }
 }

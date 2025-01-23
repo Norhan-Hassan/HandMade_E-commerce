@@ -24,8 +24,10 @@ namespace HandMade.Entities.Models
         public string? TrackingNumber { get; set; }
         public string? SessionId { get; set; }
         public string? PaymentIntentId { get; set; }
+        public  string Address { get; set; }
+        public  string Name { get; set; }
 
-
+        public  string Email { get; set; }
         [ForeignKey("applicationUser")]
         public string userId { get; set; }
         [ValidateNever]

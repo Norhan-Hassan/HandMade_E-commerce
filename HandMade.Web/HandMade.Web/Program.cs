@@ -2,8 +2,10 @@ using HandMade.DataAccess.Data;
 using HandMade.DataAccess.Repo_Implementations;
 using HandMade.Entities.Models;
 using HandMade.Entities.Repo_Interfaces;
+using HandMade.Web.Utilities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Stripe;
 
 namespace HandMade.Web
 {
@@ -21,6 +23,10 @@ namespace HandMade.Web
                 builder.Configuration.GetConnectionString("DefaultConnection")
                 )
             );
+            //stripe
+            builder.Services.Configure<StripeInfo>(
+                builder.Configuration.GetSection("stripe")
+                );
 
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>(
 
@@ -28,6 +34,9 @@ namespace HandMade.Web
 
                 ).AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            builder.Services.AddHttpContextAccessor();
+
 
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
@@ -46,6 +55,8 @@ namespace HandMade.Web
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            StripeConfiguration.ApiKey = builder.Configuration.GetSection("stripe:Secretkey").Get<string>();
 
             app.UseAuthorization();
 

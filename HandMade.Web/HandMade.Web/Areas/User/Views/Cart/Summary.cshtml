@@ -1,0 +1,109 @@
+﻿@using Microsoft.Extensions.Options
+@inject IOptions<HandMade.Web.Utilities.StripeInfo> stripe
+@model ShoppingCartViewModel
+
+<link href="~/css/summarystyle.css" rel="stylesheet" />
+<form method="post" asp-action="CheckOut">
+    <div class="wrapper">
+        <br /><br />
+        <div class="h5 large">Billing Form</div>
+        <div class="row">
+            <div class="col-lg-6 col-md-8 col-sm-10 offset-lg-0 offset-md-2 offset-sm-1">
+                <div class="mobile h5">Billing Address</div>
+                <div id="details" class="bg-white rounded pb-5">
+
+                    <div class="form-group">
+                        <label asp-for="orderSummary.Name"></label>
+                        <input asp-for="orderSummary.Name" type="text" placeholder="Enter your Name" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="orderSummary.Email">Email</label>
+                        <div class="d-flex jusify-content-start align-items-center rounded p-2">
+                            <input asp-for="orderSummary.Email" type="email" placeholder="Enter your Email">
+                            <span class="fas fa-check text-success pr-sm-2 pr-0"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label asp-for="orderSummary.Address">Address</label>
+                                <div class="d-flex jusify-content-start align-items-center rounded p-2">
+                                    <input asp-for="orderSummary.Address" type="text" placeholder="Enter your Address">
+                                    <span class="fas fa-check text-success pr-sm-2 pr-0"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-8 col-sm-10 offset-lg-0 offset-md-2 offset-sm-1 pt-lg-0 pt-3">
+                @foreach (var cart in Model.shoppingCarts)
+                {
+                    <div id="cart" class="bg-white rounded">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="h5">Cart Summary</div>
+                            <div class="h5">
+                                <a href="/User/Cart/Index" style="color:cornflowerblue; text-decoration-line:none">Edit</a>
+                            </div>
+                        </div>
+                        <div class="d-flex jusitfy-content-between align-items-center pt-3 pb-2 border-bottom">
+                            <div class="item pr-2">
+                                <img src="~/@cart.product.ImgUrl" alt="" width="80" height="80">
+                                <div class="number">@cart.count</div>
+                            </div>
+                            <div class="d-flex flex-column px-3"> <b class="h5">@cart.product.Name</b> <a href="/User/Home/Details/@cart.product.ID" class="h6 text-primary">View Product</a> </div>
+                            <div class="ml-auto"> <b class="h5">$ @cart.product.Price</b> </div>
+                        </div>
+                        <div>
+                            <br />
+                        </div>
+                    </div>
+                }
+
+                <div class="d-flex justify-content-between align-items-center py-3 border-bottom">
+                    <div class="h5 mb-0">Shipping:</div>
+                    <div class="font-weight-bold text-success">FREE</div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center py-3">
+                    <div class="h5 mb-0">Total Price:</div>
+                    <div class="d-flex align-items-center">
+                        <div class=" h5 text-primary text-uppercase px-2">EGP</div>
+                        <div class=" h4 font-weight-bold text-dark">$ @Model.TotalPrice</div>
+                    </div>
+                </div>
+
+                <div class="row pt-lg-3 pt-2 buttons mb-sm-0 mb-2">
+                    <div class="col-md-6">
+                        <div class="btn text-uppercase">
+                            <a href="/User/Cart/Index" style="color:cornflowerblue ; text-decoration-line:none">
+                                back to shopping
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 pt-md-0 pt-3">
+                        <div>
+                            <button type="submit" class="btn text-white ml-auto">
+                                <span class="fas fa-lock"></span>
+                                Check Out
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-muted pt-3" id="mobile"> <span class="fas fa-lock"></span> Your information is save </div>
+            </div>
+        </div>
+        <br />
+        <div class="text-muted"> <span class="fas fa-lock"></span> Your information is save </div>
+    </div>
+</form>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

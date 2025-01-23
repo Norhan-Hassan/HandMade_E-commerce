@@ -49,28 +49,33 @@ namespace HandMade.Web.Areas.User.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DetailsInAction(ShoppingCart cart)
         {
-            var claims = User.Identity as ClaimsIdentity;
-            if (!User.Identity.IsAuthenticated || claims == null)
+            if (unitOfWork.ApplicationUserRepo.GetCurrentUser() != null)
             {
-                return RedirectToAction("Login", "Account", new { area = "Identity" });
-            }
-            cart.userId = claims.FindFirst(ClaimTypes.NameIdentifier).Value;
-
-            ShoppingCart ExistingCart = unitOfWork.ShoppingCartRepo.GetOne(
+                cart.userId = unitOfWork.ApplicationUserRepo.GetCurrentUser();
+                ShoppingCart ExistingCart = unitOfWork.ShoppingCartRepo.GetOne(
                 s => s.userId == cart.userId & s.productId == cart.productId
                 );
 
-            if (ExistingCart == null)
-            {
-                unitOfWork.ShoppingCartRepo.Add(cart);
+                if (ExistingCart == null)
+                {
+                    unitOfWork.ShoppingCartRepo.Add(cart);
+                }
+
+                else
+                {
+                    unitOfWork.ShoppingCartRepo.IncreaseShoppingCartCount(ExistingCart, cart.count);
+                }
+                unitOfWork.Save();
+                return RedirectToAction("Index");
             }
 
             else
             {
-                unitOfWork.ShoppingCartRepo.IncreaseShoppingCartCount(ExistingCart, cart.count);
+                return RedirectToAction("Login", "Account", new { area = "Identity" });
             }
-            unitOfWork.Save();
-            return RedirectToAction("Index");
+
+
+            
         }
     
 

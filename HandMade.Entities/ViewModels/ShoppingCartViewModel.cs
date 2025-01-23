@@ -10,6 +10,7 @@ namespace HandMade.Entities.ViewModels
     public class ShoppingCartViewModel
     {
         public IEnumerable<ShoppingCart> shoppingCarts { get; set; }
+        public OrderSummary orderSummary { get; set; }
         public double TotalPrice { get; set; }
     }
 }
