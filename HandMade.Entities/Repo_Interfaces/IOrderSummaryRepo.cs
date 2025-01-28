@@ -10,7 +10,7 @@ namespace HandMade.Entities.Repo_Interfaces
     public interface IOrderSummaryRepo:IGenericRepo<OrderSummary>
     {
         void Update(OrderSummary orderSummary);
-        void TrackOrderStatus(OrderSummary orderSummary);
+        void TrackOrderStatus(int id, string orderstatus, string paymentstatus);
         double GetTotalOrderPrice(IEnumerable<ShoppingCart> shoppingCarts);
     }
 }

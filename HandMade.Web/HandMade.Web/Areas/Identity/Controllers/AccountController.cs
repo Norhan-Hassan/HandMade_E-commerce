@@ -1,4 +1,5 @@
 ﻿using HandMade.Entities.Models;
+using HandMade.Entities.Repo_Interfaces;
 using HandMade.Entities.ViewModels;
 using HandMade.Web.Utilities;
 using Microsoft.AspNetCore.Identity;
@@ -12,11 +13,13 @@ namespace HandMade.Web.Areas.Identity.Controllers
     {
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly IUnitOfWork unitOfWork;
 
-        public AccountController(SignInManager<ApplicationUser> signInManager,UserManager<ApplicationUser> userManager )
+        public AccountController(SignInManager<ApplicationUser> signInManager,UserManager<ApplicationUser> userManager ,IUnitOfWork unitOfWork)
         {
             this.signInManager = signInManager;
             this.userManager = userManager;
+            this.unitOfWork = unitOfWork;
         }
         [HttpGet]
         public IActionResult Register()
@@ -88,6 +91,43 @@ namespace HandMade.Web.Areas.Identity.Controllers
             }
             return View("Login", loginUser);
         }
+        [HttpGet]
+        public IActionResult Profile()
+        {
+            string userId = unitOfWork.ApplicationUserRepo.GetCurrentUser();
+            var user = unitOfWork.ApplicationUserRepo.GetOne(u => u.Id == userId);
+            RegisterUserViewModel Usermodel = new RegisterUserViewModel();
+            Usermodel.Name = user.UserName;
+            Usermodel.Address = user.Address;
+            Usermodel.Email = user.Email;
+          
+            return View("Profile",Usermodel);
+        }
+
+        //[HttpGet]
+        //public IActionResult Update()
+        //{
+        //    string userId = unitOfWork.ApplicationUserRepo.GetCurrentUser();
+        //    var user = unitOfWork.ApplicationUserRepo.GetOne(u => u.Id == userId);
+        //    RegisterUserViewModel Usermodel = new RegisterUserViewModel();
+        //    Usermodel.Name = user.UserName;
+        //    Usermodel.Address = user.Address;
+        //    Usermodel.Email = user.Email;
+        //    return View("Update", Usermodel);
+        //}
+
+        //[HttpPost]
+        //public IActionResult Update(RegisterUserViewModel Usermodel)
+        //{
+        //    if(ModelState.IsValid)
+        //    {
+        //        unitOfWork.ApplicationUserRepo.Update(Usermodel);
+                
+        //    }
+        //    return View("Update", Usermodel);
+        //}
+
+
 
         [HttpGet]
         public async Task<IActionResult> Logout()

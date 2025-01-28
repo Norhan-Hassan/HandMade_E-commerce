@@ -29,15 +29,15 @@ namespace HandMade.DataAccess.Repo_Implementations
             return TotalPrice;
         }
 
-        public void TrackOrderStatus(OrderSummary orderSummary)
+        public void TrackOrderStatus(int id, string orderstatus, string paymentstatus)
         {
-            var ordersInDb = context.OrderSummaries.FirstOrDefault(o=>o.ID==orderSummary.ID);
+            var ordersInDb = context.OrderSummaries.FirstOrDefault(o=>o.ID==id);
             if(ordersInDb != null)
             {
-                ordersInDb.OrderStatus = orderSummary.OrderStatus;
+                ordersInDb.OrderStatus = orderstatus;
                 if(ordersInDb.PaymentStatus != null)
                 {
-                    ordersInDb.PaymentStatus = ordersInDb.PaymentStatus;
+                    ordersInDb.PaymentStatus = paymentstatus;
                 }
             }
         }

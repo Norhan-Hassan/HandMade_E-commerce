@@ -3,6 +3,8 @@ using HandMade.Entities.Repo_Interfaces;
 using HandMade.Entities.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using Stripe.Checkout;
 using System.Security.Claims;
 
 namespace HandMade.Web.Areas.User.Controllers
@@ -90,11 +92,92 @@ namespace HandMade.Web.Areas.User.Controllers
             }
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult CheckOut()
-        //{
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CheckOut(ShoppingCartViewModel shoppingCartViewModel)
+        {
+            var userId = unitOfWork.ApplicationUserRepo.GetCurrentUser();
 
-        //}
+            shoppingCartViewModel.shoppingCarts = unitOfWork.ShoppingCartRepo.GetAll(u => u.userId == userId, include: "product");
+            shoppingCartViewModel.orderSummary.OrderStatus = "pending";
+            shoppingCartViewModel.orderSummary.PaymentStatus = "pending";
+            shoppingCartViewModel.orderSummary.OrderDate = DateTime.Now;
+            shoppingCartViewModel.orderSummary.userId = userId;
+
+            shoppingCartViewModel.orderSummary.TotalPrice =
+                unitOfWork.OrderSummaryRepo.GetTotalOrderPrice(shoppingCartViewModel.shoppingCarts);
+
+            unitOfWork.OrderSummaryRepo.Add(shoppingCartViewModel.orderSummary);
+            unitOfWork.Save();
+
+            foreach (var item in shoppingCartViewModel.shoppingCarts)
+            {
+                OrderDetails orderDetails = new OrderDetails()
+                {
+                   price = item.product.Price,
+                   count=item.count,
+                   productId=item.productId,
+                   orderSummaryId= shoppingCartViewModel.orderSummary.ID
+                };
+                unitOfWork.OrderDetailsRepo.Add(orderDetails);
+                unitOfWork.Save();
+            }
+            var domain = "https://localhost:44308/";
+            var options = new SessionCreateOptions
+            {
+                        LineItems = new List<SessionLineItemOptions>(),
+
+               
+                        Mode = "payment",
+                        SuccessUrl = domain+$"User/Cart/OrderConfirm?id={shoppingCartViewModel.orderSummary.ID}",
+                        CancelUrl = domain + $"User/Cart/index",
+            };
+            foreach (var item in shoppingCartViewModel.shoppingCarts)
+            {
+
+                var sessionLineItemOptions= new SessionLineItemOptions
+                {
+                    PriceData = new SessionLineItemPriceDataOptions
+                    {
+                        UnitAmount =(long)(item.product.Price*100),
+                        Currency = "usd",
+                        ProductData = new SessionLineItemPriceDataProductDataOptions
+                        {
+                            Name = item.product.Name,
+                        },
+                    },
+                    Quantity = item.count,
+                };
+                options.LineItems.Add(sessionLineItemOptions);
+            }
+            var service = new SessionService();
+            Session session = service.Create(options);
+            shoppingCartViewModel.orderSummary.SessionId = session.Id;
+            shoppingCartViewModel.orderSummary.PaymentIntentId = session.PaymentIntentId;
+            unitOfWork.Save();
+
+            Response.Headers.Add("Location", session.Url);
+            return new StatusCodeResult(303);
+
+
+            
+        }
+
+        public IActionResult OrderConfirm(int id)
+        {
+            OrderSummary orderSummary = unitOfWork.OrderSummaryRepo.GetOne(u => u.ID == id);
+            var service = new SessionService();
+            Session session = service.Get(orderSummary.SessionId);
+            if (session.PaymentStatus.ToLower() == "paid")
+            {
+                unitOfWork.OrderSummaryRepo.TrackOrderStatus(id,"approved", "approved");
+                unitOfWork.Save();
+
+            }
+            List<ShoppingCart> shoppingCarts= unitOfWork.ShoppingCartRepo.GetAll(u=>u.userId==orderSummary.userId).ToList();
+            unitOfWork.ShoppingCartRepo.RemoveRange(shoppingCarts);
+            unitOfWork.Save();
+            return View("OrderConfirm",id);
+        }
     }
 }

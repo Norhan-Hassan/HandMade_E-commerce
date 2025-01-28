@@ -26,6 +26,6 @@ namespace HandMade.Entities.Models
         public Product product { get; set; }
 
         public int count { get; set; }
-        public int price { get; set; }
+        public double price { get; set; }
     }
 }

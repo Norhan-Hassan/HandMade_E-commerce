@@ -1,0 +1,50 @@
+﻿@model RegisterUserViewModel
+<link href="~/css/profile.css" rel="stylesheet" />
+<div class="page-content page-container" id="page-content">
+    <div class="padding">
+        <div class="row container d-flex justify-content-center">
+            <div class="col-lg-10 col-md-12">
+                <div class="card user-card-full">
+                    <div class="row m-l-0 m-r-0">
+                        <div class="col-sm-4 bg-c-lite-green user-profile">
+                            <div class="card-block text-center text-white">
+                                <div class="m-b-25">
+                                    <img src="~/assets/images/profile-photo4.jpg" width="100px" class="img-radius" alt="User-Profile-Image">
+                                </div>
+                                <h6 class="f-w-600">@Model.Name</h6>
+                                
+                                <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
+                            </div>
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="card-block">
+                                <h6 class="m-b-20 p-b-5 b-b-default f-w-600">User Profile</h6>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <p class="m-b-10 f-w-600">Email</p>
+                                        <h6 class="text-muted f-w-400">@Model.Email</h6>
+                                    </div>
+                                    
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <p class="m-b-10 f-w-600">Address</p>
+                                        <h6 class="text-muted f-w-400">@Model.Address</h6>
+                                    </div>
+                                   
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 text-center mt-4">
+                                        <a class="btn btn-primary update-btn " href="/Identity/Account/Update" >Update</a>
+                                    </div>
+                                </div>
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
