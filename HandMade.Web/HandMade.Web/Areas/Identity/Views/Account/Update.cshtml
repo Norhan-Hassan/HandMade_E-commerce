@@ -1,0 +1,60 @@
+﻿@model RegisterUserViewModel
+<link href="~/css/profile.css" rel="stylesheet" />
+<form method="post" asp-action="UpdateInAction">
+ <input type="hidden" asp-for="@Model.Name">
+<div class="page-content page-container" id="page-content">
+    <div class="padding">
+        <div class="row container d-flex justify-content-center">
+            <div class="col-lg-10 col-md-12">
+                <div class="card user-card-full">
+                    <div class="row m-l-0 m-r-0">
+                        <div class="col-sm-4 bg-c-lite-green user-profile">
+                            <div class="card-block text-center text-white">
+                                <div class="m-b-25">
+                                    <img src="~/assets/images/profile-photo4.jpg" width="100px" class="img-radius" alt="User-Profile-Image">
+                                </div>
+                                    <label asp-for="@Model.Name" class="form-label"></label>
+                                    <input type="text" asp-for="@Model.Name" class="form-control">
+                                    <span asp-validation-for="@Model.Name" class="text text-danger"></span>
+
+                                <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
+                            </div>
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="card-block">
+                                <h6 class="m-b-20 p-b-5 b-b-default f-w-600">User Profile</h6>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        
+                                            <label asp-for="@Model.Email" class="form-label"></label>
+                                            <input type="text" asp-for="@Model.Email" class="form-control">
+                                            <span asp-validation-for="@Model.Email" class="text text-danger"></span>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                       
+                                            <label asp-for="@Model.Address" class="form-label"></label>
+                                            <input type="text" asp-for="@Model.Address" class="form-control">
+                                            <span asp-validation-for="@Model.Address" class="text text-danger"></span>
+                                    </div>
+
+                                </div>
+                                  
+                                <div class="row">
+                                    <div class="col-sm-12 text-center mt-4">
+                                        <button class="btn btn-primary update-btn" type="submit" asp-action="UpdateInAction" asp-route-name="@Model.Name">Update</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</form>

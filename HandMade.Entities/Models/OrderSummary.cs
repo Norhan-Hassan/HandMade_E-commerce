@@ -13,14 +13,29 @@ namespace HandMade.Entities.Models
     {
         [Key]
         public int ID { get; set; }
+
+        [Display(Name = "Total Price")]
         public double TotalPrice { get; set; }
+
+
+        [Display(Name = "Shipping Date")]
         public DateTime ShippingDate { get; set; }
 
+
+        [Display(Name= "Payment Status")]
         public string? PaymentStatus { get; set; }
+
+        [Display(Name = "Payment Date")]
         public DateTime PaymentDate { get; set; }
+
+        [Display(Name = "Order Status")]
         public string? OrderStatus { get; set; }
+
+        [Display(Name = "Order Date")]
         public DateTime OrderDate { get; set; }
         public string ? Carrier { get; set; }
+
+        [Display(Name = "Tracking Number")]
         public string? TrackingNumber { get; set; }
         public string? SessionId { get; set; }
         public string? PaymentIntentId { get; set; }

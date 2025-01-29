@@ -1,9 +1,12 @@
-﻿@model int
-<div class="container row">
+﻿<link href="~/css/orders.css" rel="stylesheet" />
+@model int
+<div class="order-confirmation container row">
     <div class="col-12">
-        <h4>Order Confirmation</h4>
+        <h4 class="order-title">Order Confirmation</h4>
         <br />
-        <hr />
-        <h3>Your order Number @Model has been placed successfully</h3>
+        <hr class="order-divider" />
+        <h3 class="order-message">
+            Your order number <span class="order-number">@Model</span> has been placed successfully.
+        </h3>
     </div>
 </div>

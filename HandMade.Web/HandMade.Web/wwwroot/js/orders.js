@@ -6,22 +6,21 @@ $(document).ready(function () {
 function loadData() {
     dataTable = $("#p").DataTable({
         "ajax": {
-            "url": "/Admin/Product/GetProductsJson",
+            "url": "/Admin/Orders/GetOrdersJson",
             "type": "GET",
         },
         "columns": [
+            { "data": "id" },
             { "data": "name" },
-            { "data": "description" },
-            { "data": "price" },
-            { "data": "quantity" },
-            { "data": "category.name" },
+            { "data": "applicationUser.email" },
+            { "data": "orderStatus" },
+            { "data": "totalPrice" },
             {
                 "data": "id",
                 "render": function (data) {
                     return `
-                                <a href="/Admin/Product/Edit/${data}" class="btn custom-btn">Edit</a>
-
-                                <a href="/Admin/Product/Delete/${data}" class="btn custom-btn">Delete</a>
+                                <a href="/Admin/Orders/Details?orderId=${data}" class="btn custom-btn">Details</a>
+                               
                             `
                 }
             }

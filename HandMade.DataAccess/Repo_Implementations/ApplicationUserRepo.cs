@@ -21,6 +21,10 @@ namespace HandMade.DataAccess.Repo_Implementations
             this.httpContextAccessor = httpContextAccessor;
         }
 
+        public void Update(ApplicationUser applicationUser)
+        {
+            context.Update(applicationUser);
+        }
         public string GetCurrentUser()
         {
             var user = httpContextAccessor.HttpContext.User;

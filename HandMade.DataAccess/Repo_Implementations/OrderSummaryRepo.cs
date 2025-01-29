@@ -29,12 +29,13 @@ namespace HandMade.DataAccess.Repo_Implementations
             return TotalPrice;
         }
 
-        public void TrackOrderStatus(int id, string orderstatus, string paymentstatus)
+        public void TrackOrderStatus(int id, string ?orderstatus , string ?paymentstatus=null)
         {
             var ordersInDb = context.OrderSummaries.FirstOrDefault(o=>o.ID==id);
             if(ordersInDb != null)
             {
                 ordersInDb.OrderStatus = orderstatus;
+                ordersInDb.PaymentDate=DateTime.Now;
                 if(ordersInDb.PaymentStatus != null)
                 {
                     ordersInDb.PaymentStatus = paymentstatus;

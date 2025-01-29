@@ -153,7 +153,7 @@ namespace HandMade.Web.Areas.User.Controllers
             var service = new SessionService();
             Session session = service.Create(options);
             shoppingCartViewModel.orderSummary.SessionId = session.Id;
-            shoppingCartViewModel.orderSummary.PaymentIntentId = session.PaymentIntentId;
+            
             unitOfWork.Save();
 
             Response.Headers.Add("Location", session.Url);
@@ -171,6 +171,7 @@ namespace HandMade.Web.Areas.User.Controllers
             if (session.PaymentStatus.ToLower() == "paid")
             {
                 unitOfWork.OrderSummaryRepo.TrackOrderStatus(id,"approved", "approved");
+                unitOfWork.OrderSummaryRepo.GetOne(s=>s.SessionId==session.Id).PaymentIntentId = session.PaymentIntentId;
                 unitOfWork.Save();
 
             }

@@ -9,6 +9,7 @@ namespace HandMade.Entities.Repo_Interfaces
 {
     public interface IApplicationUserRepo:IGenericRepo<ApplicationUser>
     {
+        public void Update(ApplicationUser applicationUser);
         string GetCurrentUser();
         
     }

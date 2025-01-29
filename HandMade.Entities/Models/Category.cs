@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace HandMade.Entities.Models
@@ -22,6 +23,7 @@ namespace HandMade.Entities.Models
         public string Description { get; set; }
         public DateTime CreatedTime { get; set; } = DateTime.Now;
         [ValidateNever]
+        [JsonIgnore]
         public ICollection<Product>  products{ get; set; }
     }
 }
