@@ -19,7 +19,7 @@
             {
                 <tr>
                     <td>@category.Name</td>
-                    <td>@category.Description</td>
+                    <td>@Html.Raw(category.Description)</td>
                     <td>@category.CreatedTime.ToString("yyyy-MM-dd HH:mm")</td>
                     <td class="text-center">
                         <a class="btn btn-sm btn-outline-secondary me-2" asp-action="Edit" asp-controller="Category" asp-route-id="@category.ID">

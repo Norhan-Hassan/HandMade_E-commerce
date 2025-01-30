@@ -4,6 +4,7 @@ using HandMade.Entities.ViewModels;
 using HandMade.Web.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Stripe;
 
 namespace HandMade.Web.Areas.Admin.Controllers
 {
@@ -76,6 +77,12 @@ namespace HandMade.Web.Areas.Admin.Controllers
 
         public IActionResult OrderShipping(OrderViewModel orderViewModel)
         {
+            //if (string.IsNullOrWhiteSpace(orderViewModel.orderSummary.Carrier) ||
+            //    string.IsNullOrWhiteSpace(orderViewModel.orderSummary.TrackingNumber))
+            //{
+            //    ModelState.AddModelError("", "Carrier and Tracking Number must be provided before shipping");
+                
+            //}
             int orderid = orderViewModel.orderSummary.ID;
   
             var orderInDb = unitOfWork.OrderSummaryRepo.GetOne(o => o.ID == orderid);
@@ -92,6 +99,28 @@ namespace HandMade.Web.Areas.Admin.Controllers
             
             return RedirectToAction("Details", "orders", new { orderId = orderViewModel.orderSummary.ID });
             
+        }
+        public async Task<IActionResult> CancelOrder(OrderViewModel orderViewModel)
+        {
+            var orderInDb = unitOfWork.OrderSummaryRepo.GetOne(o => o.ID == orderViewModel.orderSummary.ID);
+
+           if(orderInDb.PaymentStatus=="completed") 
+            {
+                var options = new RefundCreateOptions {
+                    Reason = RefundReasons.RequestedByCustomer,
+                    PaymentIntent = orderInDb.PaymentIntentId
+                };
+
+                var service = new RefundService();
+                var refund = await service.CreateAsync(options);
+                unitOfWork.OrderSummaryRepo.TrackOrderStatus(orderViewModel.orderSummary.ID, "canceled", "refunded");
+            }
+            else
+            {
+                unitOfWork.OrderSummaryRepo.TrackOrderStatus(orderViewModel.orderSummary.ID, "canceled", "canceled");
+            }
+            unitOfWork.Save();
+            return RedirectToAction("Details", "orders", new { orderId = orderViewModel.orderSummary.ID });
         }
     }
 }

@@ -97,10 +97,16 @@
                             <label asp-for="@Model.orderSummary.OrderDate" class="form-label"></label>
                             <input asp-for="@Model.orderSummary.OrderDate" class="form-control" readonly />
                         </div>
-                       @*  <div class="col-md-6 mb-3">
-                            <label asp-for="@Model.orderSummary.OrderStatus" class="form-label"></label>
-                            <input asp-for="@Model.orderSummary.OrderStatus" class="form-control" />
-                        </div> *@
+                         <div class="col-md-6 mb-3">
+                            <label asp-for="@Model.orderSummary.TrackingNumber" class="form-label"></label>
+                            @if (Model.orderSummary.OrderStatus == "proccessing")
+                            {
+                                <input required asp-for="@Model.orderSummary.TrackingNumber" class="form-control" />
+                            }else{
+                             <input asp-for="@Model.orderSummary.TrackingNumber" class="form-control" />
+                            }
+                            
+                        </div> 
                     </div>
 
                     <div class="row">
@@ -111,7 +117,11 @@
                             {
                                 <input required asp-for="@Model.orderSummary.Carrier" class="form-control" />
                             }
-                            <input  asp-for="@Model.orderSummary.Carrier" class="form-control" />
+                            else
+                            {
+                                <input asp-for="@Model.orderSummary.Carrier" class="form-control" />
+                            }
+                            
                             
                         </div>
                         <div class="col-md-6 mb-3">

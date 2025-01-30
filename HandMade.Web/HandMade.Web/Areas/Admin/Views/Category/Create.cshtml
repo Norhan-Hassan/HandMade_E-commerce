@@ -13,7 +13,7 @@
       </div>
       <div class="mb-3">
         <label asp-for="Description" class="form-label"></label>
-        <input type="text" asp-for="Description" class="form-control"  placeholder="Enter category description" >
+        <textarea id="textArea" asp-for="Description" class="form-control"  placeholder="Enter category description" ></textarea>
         <span asp-validation-for="Description" class="text  text-danger"></span>
       </div>
       <div class="text-end">
@@ -25,7 +25,13 @@
   </div>
 </div>
 @section Scripts {
-    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        tinymce.init({
+            selector: '#textArea',
+         
+        });
+    </script>
 }

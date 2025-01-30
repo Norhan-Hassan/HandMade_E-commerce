@@ -17,21 +17,22 @@ html {
   min-height: 100%;
 }
 .custom-cart-btn {
-    color: #0a3d62; /* Darker shade of blue */
-    border-color: #0a3d62; /* Darker shade of blue */
+    color: #0a3d62; 
+    border-color: #0a3d62; 
     text-decoration: none;
     transition: all 0.3s ease;
 }
 
     .custom-cart-btn:hover {
-        background-color: #0a3d62; /* Darker shade of blue */
+        background-color: #0a3d62; 
         color: #ffffff;
     }
 
     .custom-cart-btn .badge {
         background-color: #ffffff;
-        color: #0a3d62; /* Darker shade of blue */
+        color: #0a3d62; 
     }
+
 
 /*
 

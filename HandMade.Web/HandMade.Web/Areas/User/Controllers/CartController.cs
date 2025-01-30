@@ -168,6 +168,7 @@ namespace HandMade.Web.Areas.User.Controllers
             OrderSummary orderSummary = unitOfWork.OrderSummaryRepo.GetOne(u => u.ID == id);
             var service = new SessionService();
             Session session = service.Get(orderSummary.SessionId);
+            orderSummary.PaymentIntentId = session.PaymentIntentId;
             if (session.PaymentStatus.ToLower() == "paid")
             {
                 unitOfWork.OrderSummaryRepo.TrackOrderStatus(id,"approved", "approved");

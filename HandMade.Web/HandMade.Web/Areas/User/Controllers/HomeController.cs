@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using X.PagedList.Extensions;
 
 namespace HandMade.Web.Areas.User.Controllers
 {
@@ -21,9 +22,12 @@ namespace HandMade.Web.Areas.User.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Index(int ? page)
         {
-            var products=unitOfWork.ProductRepo.GetAll();
+            int pageSize = 8;
+            int pageNumber= page ?? 1;
+            
+            var products=unitOfWork.ProductRepo.GetAll().ToPagedList(pageNumber, pageSize);
             return View("Index",products);
         }
 

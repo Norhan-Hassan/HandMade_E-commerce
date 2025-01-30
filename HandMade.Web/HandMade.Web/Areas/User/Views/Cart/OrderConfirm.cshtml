@@ -1,12 +1,17 @@
 ﻿<link href="~/css/orders.css" rel="stylesheet" />
 @model int
-<div class="order-confirmation container row">
+<div class="order-confirmation container row text-center">
     <div class="col-12">
-        <h4 class="order-title">Order Confirmation</h4>
+        <h4 class="order-title">Thank You!</h4>
         <br />
         <hr class="order-divider" />
+    </div>
+    <div class="col-12">
+        <img src="~/Images/Animation - 1738194648676.gif" class="img-fluid mx-auto d-block" alt="Order Confirmation image" width="200px"/>
         <h3 class="order-message">
-            Your order number <span class="order-number">@Model</span> has been placed successfully.
+            Your order has been placed successfully.
         </h3>
     </div>
 </div>
+@* number <span class="order-number">@Model</span> *@
+

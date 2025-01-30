@@ -56,24 +56,32 @@ namespace HandMade.Web
 
             app.UseRouting();
 
+            
             StripeConfiguration.ApiKey = builder.Configuration.GetSection("stripe:Secretkey").Get<string>();
 
+
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(
-                name: "default",
+                name: "Identity",
                 pattern: "{area=Identity}/{controller=Account}/{action=Register}/{id?}"
                 );
 
             app.MapControllerRoute(
-                name: "default",
+                name: "User",
                 pattern: "{area=User}/{controller=Home}/{action=Details}/{id?}"
                 );
 
                app.MapControllerRoute(
-                name: "default",
+                name: "Admin",
                 pattern: "{area=Admin}/{controller=Product}/{action=Index}/{id?}"
               );
+            app.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}"
+                );
+
             app.Run();
         }
     }
