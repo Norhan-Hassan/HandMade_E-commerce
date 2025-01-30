@@ -1,5 +1,5 @@
 # HandMade E-commerce Project
-[!(https://raw.githubusercontent.com/Norhan-Hassan/HandMade_E-commerce/blob/main/Screenshot%202025-01-30%20234101.png)]
+(https://raw.githubusercontent.com/Norhan-Hassan/HandMade_E-commerce/blob/main/Screenshot%202025-01-30%20234101.png)
 Features
 
 1. Identity Authentication for Users and Admin
