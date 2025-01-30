@@ -21,5 +21,7 @@ namespace HandMade.DataAccess.Data
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
         public DbSet<OrderDetails> OrderDetails { get; set; }
         public DbSet<OrderSummary> OrderSummaries { get; set; }
+        public DbSet<WishList> WishLists { get; set; }
+
     }
 }

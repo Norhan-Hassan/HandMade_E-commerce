@@ -4,6 +4,7 @@ using HandMade.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HandMade.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250130140858_wishlist")]
+    partial class wishlist
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -277,7 +280,7 @@ namespace HandMade.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<string>("applicationUserID")
+                    b.Property<string>("applicationUserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
@@ -286,7 +289,7 @@ namespace HandMade.DataAccess.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("applicationUserID");
+                    b.HasIndex("applicationUserId");
 
                     b.HasIndex("productID");
 
@@ -490,7 +493,7 @@ namespace HandMade.DataAccess.Migrations
                 {
                     b.HasOne("HandMade.Entities.Models.ApplicationUser", "applicationUser")
                         .WithMany("WishLists")
-                        .HasForeignKey("applicationUserID")
+                        .HasForeignKey("applicationUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

@@ -104,42 +104,42 @@ namespace HandMade.Web.Areas.Identity.Controllers
             return View("Profile",Usermodel);
         }
 
-        [HttpGet]
-        public IActionResult Update()
-        {
-            string userId = unitOfWork.ApplicationUserRepo.GetCurrentUser();
-            var user = unitOfWork.ApplicationUserRepo.GetOne(u => u.Id == userId);
+        //[HttpGet]
+        //public IActionResult Update()
+        //{
+        //    string userId = unitOfWork.ApplicationUserRepo.GetCurrentUser();
+        //    var user = unitOfWork.ApplicationUserRepo.GetOne(u => u.Id == userId);
 
-            RegisterUserViewModel Usermodel = new RegisterUserViewModel();
-            Usermodel.Name = user.UserName;
-            Usermodel.Address = user.Address;
-            Usermodel.Email = user.Email;
-            //Usermodel.Password = user.PasswordHash;
+        //    RegisterUserViewModel Usermodel = new RegisterUserViewModel();
+        //    Usermodel.Name = user.UserName;
+        //    Usermodel.Address = user.Address;
+        //    Usermodel.Email = user.Email;
+        //    //Usermodel.Password = user.PasswordHash;
             
 
-            return View("Update", Usermodel);
-        }
+        //    return View("Update", Usermodel);
+        //}
 
-        [HttpPost]
-        public IActionResult UpdateInAction(RegisterUserViewModel Usermodel, string username)
-        {
-            if(ModelState.IsValid)
-            {
-                string userId = unitOfWork.ApplicationUserRepo.GetCurrentUser();
-                var user = unitOfWork.ApplicationUserRepo.GetOne(u => u.Id == userId);
+  
+        //public IActionResult UpdateInAction(RegisterUserViewModel Usermodel, string username)
+        //{
+        //    if(ModelState.IsValid)
+        //    {
+        //        string userId = unitOfWork.ApplicationUserRepo.GetCurrentUser();
+        //        var user = unitOfWork.ApplicationUserRepo.GetOne(u => u.Id == userId);
 
-                user.UserName = Usermodel.Name;
-                user.Address = Usermodel.Address;
-                user.Email= Usermodel.Email;
+        //        user.UserName = Usermodel.Name;
+        //        user.Address = Usermodel.Address;
+        //        user.Email= Usermodel.Email;
                 
                 
-                unitOfWork.ApplicationUserRepo.Update(user);
-                unitOfWork.Save();
-                return RedirectToAction("Profile", Usermodel);
-            }
-            return View("Update", Usermodel);
+        //        unitOfWork.ApplicationUserRepo.Update(user);
+        //        unitOfWork.Save();
+        //        return RedirectToAction("Profile", Usermodel);
+        //    }
+        //    return View("Update", Usermodel);
            
-        }
+        //}
 
 
 

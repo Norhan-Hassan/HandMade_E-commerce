@@ -21,6 +21,9 @@ namespace HandMade.DataAccess.Repo_Implementations
         public IOrderSummaryRepo OrderSummaryRepo { get; private set; }
 
         public IOrderDetailsRepo OrderDetailsRepo { get; private set; }
+        public IWishRepo WishRepo { get; private set; }
+
+
 
         private readonly IHttpContextAccessor httpContextAccessor;
 
@@ -34,6 +37,7 @@ namespace HandMade.DataAccess.Repo_Implementations
             this.OrderSummaryRepo = new OrderSummaryRepo(context);
             this.OrderDetailsRepo = new OrderDetailsRepo(context);
             this.ApplicationUserRepo = new ApplicationUserRepo(context,httpContextAccessor);
+            this.WishRepo = new WishRepo(context);
         }
 
         public void Dispose()

@@ -1,0 +1,43 @@
+﻿@model IEnumerable<WishListViewModel>
+
+<link rel="stylesheet" href="~/css/site.css" />
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            @if (Model == null || !Model.Any())
+            {
+               <partial name="_NotFoundPartial"></partial>
+            }
+            @foreach (var item in Model)
+            {
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <a href="\User\Home\Details\@item.productId">
+                            <img class="card-img-top"
+                                 src="~/@item.Image"
+                                 alt="prodcut image"
+                                 style="width: 265px; height: 300px; object-fit: cover; object-position: center;" />
+                        </a>
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <h5 class="fw-bolder">@item.productName</h5>
+                                $ @item.productPrice
+                            </div>
+                        </div>
+
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent d-flex justify-content-center align-items-center">
+                           
+                            <span class="mx-2">
+                                <a class="btn btn-outline-dark custom-heart-btn" href="/User/Wish/RemoveFromWishList/@item.productId">
+                                    <i class="bi-heart"></i> Remove 
+                                </a>
+                            </span>
+                        </div>
+                   
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+   
+</section>

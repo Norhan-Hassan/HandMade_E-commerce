@@ -27,8 +27,9 @@ namespace HandMade.Web.Areas.User.Controllers
             int pageSize = 8;
             int pageNumber= page ?? 1;
             
-            var products=unitOfWork.ProductRepo.GetAll().ToPagedList(pageNumber, pageSize);
-            return View("Index",products);
+           var products=unitOfWork.ProductRepo.GetAll().ToPagedList(pageNumber, pageSize);
+           return View("Index",products);
+            
         }
 
         [HttpGet]

@@ -14,6 +14,8 @@ namespace HandMade.Entities.Repo_Interfaces
         public IApplicationUserRepo ApplicationUserRepo { get; }
         public IOrderSummaryRepo OrderSummaryRepo { get;  }
         public IOrderDetailsRepo OrderDetailsRepo { get; }
+        public IWishRepo WishRepo { get; }
+
         
         public int Save();
     }
