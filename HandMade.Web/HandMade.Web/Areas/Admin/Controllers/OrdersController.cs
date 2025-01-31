@@ -67,7 +67,7 @@ namespace HandMade.Web.Areas.Admin.Controllers
         
         public IActionResult ProccessOrder(OrderViewModel orderViewModel)
         {
-            unitOfWork.OrderSummaryRepo.TrackOrderStatus(orderViewModel.orderSummary.ID,"proccessing", "completed");
+            unitOfWork.OrderSummaryRepo.TrackOrderStatus(orderViewModel.orderSummary.ID,OrderStatusConsts.Proccessing, OrderStatusConsts.Paid);
             unitOfWork.Save();
 
             return RedirectToAction("Details", "orders" , new {orderId=orderViewModel.orderSummary.ID});
@@ -89,7 +89,7 @@ namespace HandMade.Web.Areas.Admin.Controllers
 
             orderInDb.TrackingNumber = orderViewModel.orderSummary.TrackingNumber;
             orderInDb.Carrier = orderViewModel.orderSummary.Carrier;
-            orderInDb.OrderStatus ="shipping";
+            orderInDb.OrderStatus = OrderStatusConsts.Shipping;
             orderInDb.ShippingDate = DateTime.Now;
 
             unitOfWork.OrderSummaryRepo.Update(orderInDb);
@@ -104,7 +104,7 @@ namespace HandMade.Web.Areas.Admin.Controllers
         {
             var orderInDb = unitOfWork.OrderSummaryRepo.GetOne(o => o.ID == orderViewModel.orderSummary.ID);
 
-           if(orderInDb.PaymentStatus=="completed") 
+           if(orderInDb.PaymentStatus==OrderStatusConsts.Paid) 
             {
                 var options = new RefundCreateOptions {
                     Reason = RefundReasons.RequestedByCustomer,
@@ -113,11 +113,11 @@ namespace HandMade.Web.Areas.Admin.Controllers
 
                 var service = new RefundService();
                 var refund = await service.CreateAsync(options);
-                unitOfWork.OrderSummaryRepo.TrackOrderStatus(orderViewModel.orderSummary.ID, "canceled", "refunded");
+                unitOfWork.OrderSummaryRepo.TrackOrderStatus(orderViewModel.orderSummary.ID, OrderStatusConsts.Canceled, OrderStatusConsts.Refund);
             }
             else
             {
-                unitOfWork.OrderSummaryRepo.TrackOrderStatus(orderViewModel.orderSummary.ID, "canceled", "canceled");
+                unitOfWork.OrderSummaryRepo.TrackOrderStatus(orderViewModel.orderSummary.ID, OrderStatusConsts.Canceled, OrderStatusConsts.Canceled);
             }
             unitOfWork.Save();
             return RedirectToAction("Details", "orders", new { orderId = orderViewModel.orderSummary.ID });

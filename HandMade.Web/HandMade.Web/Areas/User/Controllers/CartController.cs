@@ -1,6 +1,7 @@
 ﻿using HandMade.Entities.Models;
 using HandMade.Entities.Repo_Interfaces;
 using HandMade.Entities.ViewModels;
+using HandMade.Web.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -99,8 +100,8 @@ namespace HandMade.Web.Areas.User.Controllers
             var userId = unitOfWork.ApplicationUserRepo.GetCurrentUser();
 
             shoppingCartViewModel.shoppingCarts = unitOfWork.ShoppingCartRepo.GetAll(u => u.userId == userId, include: "product");
-            shoppingCartViewModel.orderSummary.OrderStatus = "pending";
-            shoppingCartViewModel.orderSummary.PaymentStatus = "pending";
+            shoppingCartViewModel.orderSummary.OrderStatus = OrderStatusConsts.Pending;
+            shoppingCartViewModel.orderSummary.PaymentStatus = OrderStatusConsts.Pending;
             shoppingCartViewModel.orderSummary.OrderDate = DateTime.Now;
             shoppingCartViewModel.orderSummary.userId = userId;
 
@@ -169,9 +170,9 @@ namespace HandMade.Web.Areas.User.Controllers
             var service = new SessionService();
             Session session = service.Get(orderSummary.SessionId);
             orderSummary.PaymentIntentId = session.PaymentIntentId;
-            if (session.PaymentStatus.ToLower() == "paid")
+            if (session.PaymentStatus.ToLower() == OrderStatusConsts.Paid)
             {
-                unitOfWork.OrderSummaryRepo.TrackOrderStatus(id,"approved", "approved");
+                unitOfWork.OrderSummaryRepo.TrackOrderStatus(id, OrderStatusConsts.Approved, OrderStatusConsts.Approved);
                 unitOfWork.OrderSummaryRepo.GetOne(s=>s.SessionId==session.Id).PaymentIntentId = session.PaymentIntentId;
                 unitOfWork.Save();
 
