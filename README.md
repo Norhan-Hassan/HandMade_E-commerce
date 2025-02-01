@@ -33,6 +33,6 @@ Technologies and Techniques
 
 Installation
 -- Clone the repository
--- Set up the database
--- Configure app settings
+-- Set up the database --> update-database
+-- Configure app settings --> for your payment keys
 -- Run the application
