@@ -120,6 +120,7 @@ namespace HandMade.Web.Areas.Admin.Controllers
                 unitOfWork.OrderSummaryRepo.TrackOrderStatus(orderViewModel.orderSummary.ID, OrderStatusConsts.Canceled, OrderStatusConsts.Canceled);
             }
             unitOfWork.Save();
+            TempData["Deleted"] = "Order is Canceled successfully";
             return RedirectToAction("Details", "orders", new { orderId = orderViewModel.orderSummary.ID });
         }
     }

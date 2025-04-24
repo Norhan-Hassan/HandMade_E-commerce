@@ -45,6 +45,7 @@ namespace HandMade.Web.Areas.Admin.Controllers
             var user = context.ApplicationUsers.FirstOrDefault(i => i.Id == id);
             context.Remove(user);
             context.SaveChanges();
+            TempData["Deleted"] = "User is Deleted successfully";
             return RedirectToAction("Index");
         }
 

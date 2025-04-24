@@ -60,6 +60,7 @@ namespace HandMade.Web.Areas.Admin.Controllers
                 }
                 unitOfWork.ProductRepo.Add(productCategoryListViewModel.product);
                 unitOfWork.Save();
+                TempData["Created"] = "Product is Created successfully";
                 return RedirectToAction("Index");
             }
             productCategoryListViewModel.categories = unitOfWork.CategoryRepo.GetAll();
@@ -96,6 +97,7 @@ namespace HandMade.Web.Areas.Admin.Controllers
                 }
                 unitOfWork.ProductRepo.Update(productVM.product);
                 unitOfWork.Save();
+                TempData["Updated"] = "Product is Updated successfully";
                 return RedirectToAction("Index");
             }
             productVM.categories = unitOfWork.CategoryRepo.GetAll();
@@ -120,6 +122,7 @@ namespace HandMade.Web.Areas.Admin.Controllers
             var product = unitOfWork.ProductRepo.GetOne(p => p.ID == id);
             unitOfWork.ProductRepo.Remove(product);
             unitOfWork.Save();
+            TempData["Deleted"] = "Product is Deleted successfully";
             return RedirectToAction("Index");
         }
     }

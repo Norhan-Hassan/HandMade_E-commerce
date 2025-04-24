@@ -38,6 +38,7 @@ namespace HandMade.Web.Areas.Admin.Controllers
             {
                 unitOfWork.CategoryRepo.Add(category);
                 unitOfWork.Save();
+                TempData["Created"] = "Category is created successfully";
                 return RedirectToAction("Index");
             }
             return View("Create", category);
@@ -57,6 +58,7 @@ namespace HandMade.Web.Areas.Admin.Controllers
             {
                 unitOfWork.CategoryRepo.Update(category);
                 unitOfWork.Save();
+                TempData["Updated"] = "Category is Updated successfully";
                 return RedirectToAction("Index");
             }
             return View("Edit", category);
@@ -73,6 +75,7 @@ namespace HandMade.Web.Areas.Admin.Controllers
         {
             unitOfWork.CategoryRepo.Remove(category);
             unitOfWork.Save();
+            TempData["Deleted"] = "Department is Deleted successfully";
             return RedirectToAction("Index");
         }
 

@@ -23,8 +23,6 @@ namespace HandMade.DataAccess.Repo_Implementations
         public IOrderDetailsRepo OrderDetailsRepo { get; private set; }
         public IWishRepo WishRepo { get; private set; }
 
-
-
         private readonly IHttpContextAccessor httpContextAccessor;
 
         public UnitOfWork(ApplicationDbContext context, IHttpContextAccessor httpContextAccessor)
