@@ -1,38 +1,53 @@
-# HandMade E-commerce Project
+# 🧵 HandMade E-commerce Project
 
-Features
+A full-featured handcrafted goods e-commerce website built with **ASP.NET Core 8 MVC**, supporting admin and user roles, product management, Stripe payments, and more.
 
-1. Identity Authentication for Users and Admin
-    User Registration and Login: Secure sign-up and login functionality for customers and admin roles using the Identity framework.
-    Role-based Authorization: Users and Admins have different permissions. Admin can manage categories, products, and orders.
+---
+## 📽️ Demo
 
-2. Admin Management of Categories and Products
-      Category Management: Admins can create, edit, and delete product categories.
-      Product Management: Admins can add, update, and remove products, along with managing product details like price, stock, and descriptions.
-      Track Order Status: The admin can track the user order status (e.g., "Pending," "Shipped," or "Canceled").
-   
-4. Create New User Roles
-      Role Assignment: Admins can create new roles (e.g., "Editor")
+[![Watch the Demo](https://img.youtube.com/vi/5g2DTWFKvVg/0.jpg)](https://youtu.be/5g2DTWFKvVg)
 
-6. User Shopping Cart and Payment Integration
-     Shopping Cart: Users can add, remove, and update products in their shopping cart.
-     Stripe Integration: Payment processing through Stripe is used to handle user payments securely.
-    
-8. Wishlist
-    Add to Wishlist: Users can add items to their wishlist for future purchases.
+## ✨ Features
 
+### 🔐 1. Identity Authentication for Users and Admins
+- **User Registration and Login**: Secure authentication using the Identity Framework.
+- **Role-Based Authorization**:  
+  - Users: Can browse, shop, and manage personal features.  
+  - Admins: Have full control over categories, products, and order management.
 
-Technologies and Techniques
+### 🗂️ 2. Admin Management of Categories and Products
+- **Category Management**: Create, update, and delete product categories.
+- **Product Management**: Full CRUD operations for products with stock, price, and descriptions.
+- **Order Tracking**: Track and update order statuses (e.g., *Pending*, *Shipped*, *Cancelled*).
 
-1- Asp.net core 8 MVC, Entity Framework Core 8
-2- 3 n-tier architecture, Generic Repository pattern, and Unit OF Work, Areas
-2- Stripe Payment Integration
-3- HTML CSS Bootstrap Javascript 
+### 👥 3. User Role Management
+- **Custom Role Assignment**: Admins can create and assign custom roles (e.g., *Editor*).
 
+### 🛒 4. Shopping Cart & Payment Integration
+- **Shopping Cart**: Users can add, remove, and modify cart items.
+- **Stripe Integration**: Secure payment processing using [Stripe](https://stripe.com/).
 
+### 💖 5. Wishlist
+- **Add to Wishlist**: Users can save favorite items for future purchases.
 
-Installation
--- Clone the repository
--- Set up the database --> update-database
--- Configure app settings --> for your payment keys
--- Run the application
+---
+
+## 🛠️ Technologies & Techniques
+
+- **ASP.NET Core 8 MVC**  
+- **Entity Framework Core 8**
+- **N-Tier Architecture**
+- **Generic Repository & Unit of Work Pattern**
+- **Areas for Admin/User Separation**
+- **Stripe Payment Integration**
+- **Frontend**: HTML, CSS, Bootstrap, JavaScript  
+- **DataTables** for dynamic product listing and filtering
+
+---
+
+## 🚀 Installation & Setup
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/your-username/HandMade-Ecommerce.git
+   cd HandMade-Ecommerce
