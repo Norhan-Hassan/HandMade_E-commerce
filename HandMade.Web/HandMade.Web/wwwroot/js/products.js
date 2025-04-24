@@ -19,9 +19,9 @@ function loadData() {
                 "data": "id",
                 "render": function (data) {
                     return `
-                                <a href="/Admin/Product/Edit/${data}" class="btn btn-sm btn-outline-secondary me-2">Edit</a>
+                                <a href="/Admin/Product/Edit/${data}" class="btn btn-sm btn-outline-secondary me-2" > Edit</a>
 
-                                <a href="/Admin/Product/Delete/${data}"class="btn btn-sm btn-outline-secondary me-2>Delete</a>
+                                <a href="/Admin/Product/Delete/${data}" class="btn btn-sm btn-outline-secondary me-2" > Delete</a>
                             `
                 }
             }
