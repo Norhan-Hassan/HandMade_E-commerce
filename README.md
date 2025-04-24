@@ -5,7 +5,11 @@ A full-featured handcrafted goods e-commerce website built with **ASP.NET Core 8
 ---
 ## 📽️ Demo
 
-[![Watch the Demo](https://img.youtube.com/vi/5g2DTWFKvVg/0.jpg)](https://youtu.be/5g2DTWFKvVg)
+  [[Watch the Demo]](https://youtu.be/5g2DTWFKvVg)
+
+![Screenshot 2025-04-24 210122](https://github.com/user-attachments/assets/641fb143-ea62-4690-a933-17e5af88afb3)
+
+
 
 ## ✨ Features
 
